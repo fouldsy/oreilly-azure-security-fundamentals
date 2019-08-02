@@ -37,9 +37,7 @@ az sql server create  \
 az cosmosdb create \
     --resource-group oreilly-security-essentials \
     --name cosmosdb \
-    --kind mongodb \
-    --enable-virtual-network true \
-    --no-wait
+    --kind mongodb
 
 # Create a Recovery Services vault for Backup and Site Recovery
 az backup vault create \
