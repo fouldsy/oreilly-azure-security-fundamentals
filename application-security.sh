@@ -23,6 +23,7 @@ az identity create \
 
 # Create a SQL Server
 # As it takes a few minutes to create the SQL server, return control to the CLI
+# PROVIDE YOUR OWN SECURE --admin-password
 az sql server create  \
     --resource-group oreilly-security-essentials \
     --name sql-centralus \
