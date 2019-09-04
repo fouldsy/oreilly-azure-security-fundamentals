@@ -6,6 +6,7 @@
 # Create an Azure Key Vault
 # This vault is enabled for use during deployments and for disk encryption
 # Soft delete or secrets and purge protection is also enabled
+# PROVIDE YOUR OWN UNIQUE KEY VAULT NAME
 az keyvault create \
     --resource-group oreilly-security-essentials \
     --name key-vault-centralus \
@@ -22,24 +23,25 @@ az identity create \
 
 # Create a SQL Server
 # As it takes a few minutes to create the SQL server, return control to the CLI
-# Enter your own secure password
 az sql server create  \
     --resource-group oreilly-security-essentials \
     --name sql-centralus \
     --admin-user oreillyuser \
-    --admin-password P@ssw0rd! \
+    --admin-password P@ssw0rdP@ssw0rd \
     --assign-identity \
     --no-wait
 
 # Create a Cosmos DB instance
-# Provide a unique Cosmosb DB account name
 # As it takes a few minutes to create the Cosmos DB intance, return control to the CLI
+# PROVIDE YOUR OWN UNIQUE COSMOS DB NAME
 az cosmosdb create \
     --resource-group oreilly-security-essentials \
-    --name cosmosdb \
-    --kind mongodb
+    --name cosmosdb-oreilly \
+    --kind mongodb \
+    --enable-virtual-network true
 
 # Create a Recovery Services vault for Backup and Site Recovery
+# PROVIDE YOUR OWN UNIQUE RECOVERY SERVICES VAULT NAME
 az backup vault create \
     --resource-group oreilly-security-essentials \
     --name recoveryvault-centralus \

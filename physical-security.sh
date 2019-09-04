@@ -6,16 +6,33 @@
 # Create a public IP address and VPN gateway
 # It will take 30-40 mins for the VPN gateway to be created, so --no-wait is
 # used to return control the CLI prompt right away.
+
+# PROVIDE YOUR OWN UNIQUE --dns-name
 az network public-ip create \
     --resource-group oreilly-security-essentials \
-    --name ip-vpn-gateway \
-    --dns-name vpngatewayikf
+    --name ip-vpn-gateway-centralus \
+    --dns-name vpngatewaycentralus
 
 az network vnet-gateway create \
     --resource-group oreilly-security-essentials \
-    --name centralus-gateway \
+    --name gateway-centralus \
     --vnet vnet-centralus \
-    --public-ip-addresses ip-vpn-gateway \
+    --public-ip-addresses ip-vpn-gateway-centralus \
+    --no-wait
+
+# PROVIDE YOUR OWN UNIQUE --dns-name
+az network public-ip create \
+    --resource-group oreilly-security-essentials \
+    --name ip-vpn-gateway-northeurope \
+    --location northeurope \
+    --dns-name vpngatewaynortheurope
+
+az network vnet-gateway create \
+    --resource-group oreilly-security-essentials \
+    --name gateway-northeurope \
+    --location northeurope \
+    --vnet vnet-northeurope \
+    --public-ip-addresses ip-vpn-gateway-northeurope \
     --no-wait
 
 # Create and configure an Azure firewall
@@ -35,13 +52,14 @@ az network firewall ip-config create \
     --name firewall-ip-config \
     --vnet-name vnet-centralus \
     --firewall-name firewall-centralus \
-    --public-ip-address ip-firewall
+    --public-ip-address ip-firewall \
+    --no-wait
 
 # Create an Azure Storage account for encrupted blob data and HTTPS
-# You need to provide your own unique storage account name
+# PROVIDE YOUR OWN UNIQUE STORAGE ACCOUNT NAME
 az storage account create \
     --resource-group oreilly-security-essentials \
-    --name storage-centralus \
+    --name storagecentralus \
     --encryption-services blob \
     --https-only true \
     --sku Standard_LRS
