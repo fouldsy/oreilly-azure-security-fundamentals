@@ -52,8 +52,7 @@ az network firewall ip-config create \
     --name firewall-ip-config \
     --vnet-name vnet-centralus \
     --firewall-name firewall-centralus \
-    --public-ip-address ip-firewall \
-    --no-wait
+    --public-ip-address ip-firewall
 
 # Create an Azure Storage account for encrupted blob data and HTTPS
 # PROVIDE YOUR OWN UNIQUE STORAGE ACCOUNT NAME
